@@ -1,37 +1,31 @@
 package Client;
 
+import ADT.LDeliveryman;
+import Entity.Delivery;
+import Interface.DeliverymanInterface;
+
+import TableModel.PendingTableModel;
+
 
 
 public class CheckPendingDelivery extends javax.swing.JFrame {
     
     
+    public static DeliverymanInterface<Delivery> deliveryList = HomePage.deliveryList;
+    private DeliverymanInterface<Delivery> pendingList = new LDeliveryman<>();   
+    private PendingTableModel model;
     public CheckPendingDelivery() {
         initComponents();
         this.setTitle("Check Deliveryman Status");
         String[] tableColumnsName1 = {"DeliveryManID", "Name","OrderID"};
-        DefaultTableModel mode1 = (DefaultTableModel) jtblPendingDelivery.getModel();
-        mode1.setColumnIdentifiers(tableColumnsName1);
-        mode1.setRowCount(0);
-      /**  ResultSet rs1 = deliveryManDA.selectPendingDelivery();
+        pendingList = deliveryList.getPendingRecord();
+      
+        model = new PendingTableModel(pendingList);
         
-             
-            try {                   
-                ResultSetMetaData rsmd = rs1.getMetaData();
-                
-                    int colNo = rsmd.getColumnCount();
-                    while(rs1.next()){
-                        Object[] objects = new Object[colNo];
-                        for(int i = 0; i < colNo; i++){
-                            objects[i] = rs1.getObject(i+1);
-                        }
-                        mode1.addRow(objects);
-                    }
-                    jtblPendingDelivery.setModel(mode1);
-
-            } catch (SQLException ex) {
-                Logger.getLogger(SelectToUpdate.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
+        
+        this.jtblPendingDelivery.setModel(model);
+      
+      /**      
             String[] tableColumnsName2 = {"DeliveryManID", "Name"};
             DefaultTableModel mode2 = (DefaultTableModel) jtblFreeDeliveryMan.getModel();
             mode2.setColumnIdentifiers(tableColumnsName2);
@@ -193,54 +187,9 @@ public class CheckPendingDelivery extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtRefreshActionPerformed
-      /**  String[] tableColumnsName1 = {"DeliveryManID", "Name","OrderID"};
-        DefaultTableModel mode1 = (DefaultTableModel) jtblPendingDelivery.getModel();
-        mode1.setColumnIdentifiers(tableColumnsName1);
-        mode1.setRowCount(0);
-        ResultSet rs1 = deliveryManDA.selectPendingDelivery();
-        
-             
-            try {                   
-                ResultSetMetaData rsmd = rs1.getMetaData();
-                
-                    int colNo = rsmd.getColumnCount();
-                    while(rs1.next()){
-                        Object[] objects = new Object[colNo];
-                        for(int i = 0; i < colNo; i++){
-                            objects[i] = rs1.getObject(i+1);
-                        }
-                        mode1.addRow(objects);
-                    }
-                    jtblPendingDelivery.setModel(mode1);
-
-            } catch (SQLException ex) {
-                Logger.getLogger(SelectToUpdate.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-            String[] tableColumnsName2 = {"DeliveryManID", "Name"};
-            DefaultTableModel mode2 = (DefaultTableModel) jtblFreeDeliveryMan.getModel();
-            mode2.setColumnIdentifiers(tableColumnsName2);
-            mode2.setRowCount(0);
-            ResultSet rs2 = deliveryManDA.selectAvailable();
-        
-             
-            try {                   
-                ResultSetMetaData rsmd = rs2.getMetaData();
-                
-                    int colNo = rsmd.getColumnCount();
-                    while(rs2.next()){
-                        Object[] objects = new Object[colNo];
-                        for(int i = 0; i < colNo; i++){
-                            objects[i] = rs2.getObject(i+1);
-                        }
-                        mode2.addRow(objects);
-                    }
-                    jtblFreeDeliveryMan.setModel(mode2);
-
-            } catch (SQLException ex) {
-                Logger.getLogger(SelectToUpdate.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            **/
+      pendingList = deliveryList.getPendingRecord();
+        model = new PendingTableModel(pendingList);
+        this.jtblPendingDelivery.setModel(model);
     }//GEN-LAST:event_jbtRefreshActionPerformed
 
     /**

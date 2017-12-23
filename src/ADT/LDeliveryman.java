@@ -2,6 +2,7 @@ package ADT;
 
 
 import Client.HomePage;
+import Entity.Delivery;
 import Entity.Deliveryman;
 import Interface.DeliverymanInterface;
 
@@ -90,7 +91,7 @@ public class LDeliveryman<T> implements DeliverymanInterface<T> {
         }
         return activeList;
     }
-
+    
     @Override
     public boolean searchRecord(String id) {
         
@@ -233,7 +234,23 @@ public class LDeliveryman<T> implements DeliverymanInterface<T> {
         return result;
   
     }
-    
+    public DeliverymanInterface<Delivery> getPendingRecord() {
+        
+        DeliverymanInterface<Delivery> pendingList = new LDeliveryman<>();
+        if(!HomePage.deliveryList.isEmpty()){
+            Node currentNode = firstNode;
+            for(int i = 0; i < numberOfEntries; i++){
+                Delivery delivery = (Delivery)currentNode.data;
+                String orderID = delivery.getOrderID();
+                if(orderID != null){
+                     pendingList.addRecord(delivery);
+                }
+                currentNode = currentNode.next;
+        
+            }
+        }
+        return pendingList;
+    }
     private class Node {
 
         private T data;

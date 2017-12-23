@@ -6,6 +6,7 @@
 package Client;
 
 import ADT.LDeliveryman;
+import Entity.Delivery;
 import Entity.Deliveryman;
 import Interface.DeliverymanInterface;
 
@@ -16,6 +17,7 @@ import Interface.DeliverymanInterface;
 public class HomePage extends javax.swing.JFrame {
     
     public static DeliverymanInterface<Deliveryman> deliverymanList = new LDeliveryman<>();
+    public static DeliverymanInterface<Delivery> deliveryList = new LDeliveryman<>();
     /**
      * Creates new form HomePage
      */
@@ -24,9 +26,16 @@ public class HomePage extends javax.swing.JFrame {
         Deliveryman newDeliveryMan1 = new Deliveryman("D1001","QY","971008-56-5092","012-2222222","qy@gmail.com","test","23/12/2017",null,"Part-Time");
         Deliveryman newDeliveryMan2 = new Deliveryman("D1002","WZ","950518-56-5092","012-3333333","wz@gmail.com","test","23/12/2017",null,"Full-Time");
         Deliveryman newDeliveryMan3 = new Deliveryman("D1003","WS","952133-56-5092","012-2222222","ws@gmail.com","test","23/12/2017",null,"Retired");
+        Delivery delivery1 = new Delivery("D1001","QY",null);
+        Delivery delivery2 = new Delivery("D1002","WZ","O1001");
+        Delivery delivery3 = new Delivery("D1003","WS","O1002");
         deliverymanList.addRecord(newDeliveryMan1);
         deliverymanList.addRecord(newDeliveryMan2);
         deliverymanList.addRecord(newDeliveryMan3);
+        deliveryList.addRecord(delivery1);
+        deliveryList.addRecord(delivery2);
+        deliveryList.addRecord(delivery3);
+        
         System.out.println(deliverymanList);
         
     }
@@ -42,6 +51,7 @@ public class HomePage extends javax.swing.JFrame {
 
         jbtRegistration = new javax.swing.JButton();
         jbtSelectToUpdate = new javax.swing.JButton();
+        jbtCheckPending = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,6 +69,13 @@ public class HomePage extends javax.swing.JFrame {
             }
         });
 
+        jbtCheckPending.setText("Check Pending Deliveries");
+        jbtCheckPending.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtCheckPendingActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -66,9 +83,11 @@ public class HomePage extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(144, 144, 144)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jbtSelectToUpdate)
-                    .addComponent(jbtRegistration))
-                .addContainerGap(121, Short.MAX_VALUE))
+                    .addComponent(jbtRegistration)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jbtCheckPending)
+                        .addComponent(jbtSelectToUpdate)))
+                .addContainerGap(105, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -77,7 +96,9 @@ public class HomePage extends javax.swing.JFrame {
                 .addComponent(jbtRegistration)
                 .addGap(26, 26, 26)
                 .addComponent(jbtSelectToUpdate)
-                .addContainerGap(157, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jbtCheckPending)
+                .addContainerGap(123, Short.MAX_VALUE))
         );
 
         pack();
@@ -90,6 +111,10 @@ public class HomePage extends javax.swing.JFrame {
     private void jbtSelectToUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtSelectToUpdateActionPerformed
         new ManageDeliveryman().setVisible(true);
     }//GEN-LAST:event_jbtSelectToUpdateActionPerformed
+
+    private void jbtCheckPendingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtCheckPendingActionPerformed
+        new CheckPendingDelivery().setVisible(true);
+    }//GEN-LAST:event_jbtCheckPendingActionPerformed
 
     /**
      * @param args the command line arguments
@@ -127,6 +152,7 @@ public class HomePage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jbtCheckPending;
     private javax.swing.JButton jbtRegistration;
     private javax.swing.JButton jbtSelectToUpdate;
     // End of variables declaration//GEN-END:variables

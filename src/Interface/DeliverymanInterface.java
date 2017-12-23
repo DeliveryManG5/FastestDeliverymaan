@@ -24,5 +24,5 @@ public interface DeliverymanInterface<T> {
     int getNumberOfEntries();
     T get(int givenPosition);
     int getPosition(String id);
-    
+    DeliverymanInterface getPendingRecord();    
 }
