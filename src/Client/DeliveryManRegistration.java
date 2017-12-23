@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 public class DeliveryManRegistration extends javax.swing.JFrame {
 
 
-    public static DeliverymanInterface<Deliveryman> deliverymanList = new LDeliveryman<>();
+    public static DeliverymanInterface<Deliveryman> deliverymanList = HomePage.deliverymanList;
     
     public DeliveryManRegistration() {
         initComponents();
@@ -230,7 +230,7 @@ public class DeliveryManRegistration extends javax.swing.JFrame {
             
             Deliveryman newDeliveryMan = new Deliveryman(deliveryManID,jtfName.getText(),jtfIC.getText(),jtfContactNum.getText(),jtfEmailAddress.getText(),jtaAddress.getText(),joinDate,null,String.valueOf(jcbStatus.getSelectedItem()));
             deliverymanList.addRecord(newDeliveryMan);
-            System.out.println(deliverymanList);
+            JOptionPane.showMessageDialog(null,"Deliveryman registered successfully.");
             clearText();            
         }
         else

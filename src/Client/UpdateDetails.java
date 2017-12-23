@@ -1,5 +1,7 @@
 package Client;
 
+import Entity.Deliveryman;
+import Interface.DeliverymanInterface;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -20,38 +22,34 @@ import javax.swing.JOptionPane;
  */
 public class UpdateDetails extends javax.swing.JFrame {
     
- //   DeliveryManDA deliveryManDA = new DeliveryManDA();
-  //  DeliveryMan deliveryMan; 
+  
     private String deliveryManID;
     private String leaveDate;
-    
+    public static DeliverymanInterface<Deliveryman> deliverymanList = HomePage.deliverymanList;
+    private Deliveryman deliveryman;
     public UpdateDetails(String id) {
-        super();
+        //super();
         initComponents();
         this.setTitle("Delivery Man's Details Update");
         setVisible(true);
         deliveryManID = id;
-    /**    ResultSet rs = deliveryManDA.selectRecord(deliveryManID);
         
-        try {                   
-            
-            while(rs.next()){
-                deliveryMan = new DeliveryMan(deliveryManID,rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9));
-                jtfName.setText(deliveryMan.getDeliveryManName());
-                jtfIC.setText(deliveryMan.getIC());
-                jtfContactNum.setText(deliveryMan.getContactNumber());
-                jtaAddress.setText(deliveryMan.getAddress());
-                jtfEmailAddress.setText(deliveryMan.getEmailAddress());
+        boolean found = deliverymanList.searchRecord(deliveryManID);
+        
+            if(found){
+                deliveryman = (Deliveryman)deliverymanList.getRecord(deliveryManID);
+                jtfName.setText(deliveryman.getDeliveryManName());
+                jtfIC.setText(deliveryman.getIC());
+                jtfContactNum.setText(deliveryman.getContactNum());
+                jtaAddress.setText(deliveryman.getAddress());
+                jtfEmailAddress.setText(deliveryman.getEmailAddress());
                 
-                if(deliveryMan.getStatus().equals("Full-Time"))
+                if(deliveryman.getStatus().equals("Full-Time"))
                     jcbStatus.setSelectedIndex(0);
-                else
+                else if (deliveryman.getStatus().equals("Part-Time"))
                     jcbStatus.setSelectedIndex(1);
-            }
-
-        } catch (SQLException ex) {
-                ex.getMessage();
-        }**/
+        
+        }
         
         
     }
@@ -217,13 +215,9 @@ public class UpdateDetails extends javax.swing.JFrame {
     private void jbtUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtUpdateActionPerformed
         boolean validate = true;
         StringBuilder str = new StringBuilder("Error:\n");
-        //String deliveryManID = deliveryManDA.generateDeliveryManID();
         String leaveDate;
         Pattern pattern = Pattern.compile("\\d{3}-\\d{7}");
         Matcher matcher = pattern.matcher(jtfContactNum.getText());
-       // Pattern patternIC = Pattern.compile("\\d{6}-\\d{2}-\\d{4}");
-       // Matcher matcherIC = patternIC.matcher(jtfIC.getText());
-        
         
        String status = (String)jcbStatus.getSelectedItem();
         if(status.equals("Retired")||status.equals("Resigned")||status.equals("Fired"))
@@ -247,10 +241,11 @@ public class UpdateDetails extends javax.swing.JFrame {
         
         if(validate){
             
-     //       DeliveryMan updateDeliveryMan = new DeliveryMan(deliveryMan.getDeliveryManID(),jtfName.getText(),jtfIC.getText(),jtfContactNum.getText(),jtaAddress.getText(),jtfEmailAddress.getText(),deliveryMan.getJoinDate(),leaveDate,String.valueOf(jcbStatus.getSelectedItem()));
-            
-     //       deliveryManDA.updateRecord(updateDeliveryMan);
-                     
+           Deliveryman updateDeliveryman = new Deliveryman(deliveryman.getDeliveryManID(),jtfName.getText(),jtfIC.getText(),jtfContactNum.getText(),jtfEmailAddress.getText(),jtaAddress.getText(),deliveryman.getJoinDate(),leaveDate,String.valueOf(jcbStatus.getSelectedItem()));
+           int position = deliverymanList.getPosition(deliveryman.getDeliveryManID());
+           deliverymanList.updateRecord(position, updateDeliveryman);
+           JOptionPane.showMessageDialog(null,"Deliveryman's details update successfully.");
+  
         }
         else
         {

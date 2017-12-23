@@ -5,17 +5,30 @@
  */
 package Client;
 
+import ADT.LDeliveryman;
+import Entity.Deliveryman;
+import Interface.DeliverymanInterface;
+
 /**
  *
  * @author ADmin
  */
 public class HomePage extends javax.swing.JFrame {
-
+    
+    public static DeliverymanInterface<Deliveryman> deliverymanList = new LDeliveryman<>();
     /**
      * Creates new form HomePage
      */
     public HomePage() {
         initComponents();
+        Deliveryman newDeliveryMan1 = new Deliveryman("D1001","QY","971008-56-5092","012-2222222","qy@gmail.com","test","23/12/2017",null,"Part-Time");
+        Deliveryman newDeliveryMan2 = new Deliveryman("D1002","WZ","950518-56-5092","012-3333333","wz@gmail.com","test","23/12/2017",null,"Full-Time");
+        Deliveryman newDeliveryMan3 = new Deliveryman("D1003","WS","952133-56-5092","012-2222222","ws@gmail.com","test","23/12/2017",null,"Retired");
+        deliverymanList.addRecord(newDeliveryMan1);
+        deliverymanList.addRecord(newDeliveryMan2);
+        deliverymanList.addRecord(newDeliveryMan3);
+        System.out.println(deliverymanList);
+        
     }
 
     /**

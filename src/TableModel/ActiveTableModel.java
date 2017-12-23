@@ -2,7 +2,6 @@ package TableModel;
 
 
 import ADT.LDeliveryman;
-import Client.DeliveryManRegistration;
 import Entity.Deliveryman;
 import Interface.DeliverymanInterface;
 import javax.swing.table.AbstractTableModel;

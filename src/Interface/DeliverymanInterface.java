@@ -11,10 +11,10 @@ package Interface;
  */
 public interface DeliverymanInterface<T> {
     boolean addRecord(T newDetails);
-    boolean updateRecord(T oldDeliveryman, T newDeliveryman);
+    boolean updateRecord(int givenPosition, T newDeliveryman);
     String generateDeliverymanID();
     DeliverymanInterface getActiveRecord();
-    DeliverymanInterface getRecord(String id);
+    T getRecord(String inputID);
     DeliverymanInterface getPendingDelivery();
     DeliverymanInterface getAvailable();
     void clear();
@@ -23,5 +23,6 @@ public interface DeliverymanInterface<T> {
     boolean searchRecord(String id);
     int getNumberOfEntries();
     T get(int row);
+    int getPosition(String id);
     
 }

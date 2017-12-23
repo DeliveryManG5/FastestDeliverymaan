@@ -6,11 +6,13 @@
 package Client;
 
 import ADT.LDeliveryman;
-import ADT.LDeliverymanWithIterator;
-import TableModel.ActiveTableModel;
 import Entity.Deliveryman;
 import Interface.DeliverymanInterface;
-import Interface.DeliverymanWithIteratorInterface;
+import TableModel.ActiveTableModel;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,14 +21,19 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ManageDeliveryman extends javax.swing.JFrame {
 
-    private DeliverymanInterface<Deliveryman> activeList = DeliveryManRegistration.deliverymanList.getActiveRecord();
+    
+    public static DeliverymanInterface<Deliveryman> deliverymanList = HomePage.deliverymanList;
+    private DeliverymanInterface<Deliveryman> activeList = new LDeliveryman<>();
+   
     private ActiveTableModel model;
     public ManageDeliveryman() {
         initComponents();
-        this.setTitle("Enter Delivery Man ID");
+        this.setTitle("Manage Deliveryman");
+        activeList = deliverymanList.getActiveRecord();
+        System.out.println(activeList);
+        model = new ActiveTableModel(activeList);
         
-        model = new ActiveTableModel(DeliveryManRegistration.deliverymanList.getActiveRecord());
-      
+        
         this.jtblDeliveryMan.setModel(model);
     }
 
@@ -41,18 +48,39 @@ public class ManageDeliveryman extends javax.swing.JFrame {
 
         selectPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jtblDeliveryMan = new javax.swing.JTable();
-        jtfDeliveryManID = new javax.swing.JTextField();
         jbtView = new javax.swing.JButton();
         jbtRefresh = new javax.swing.JButton();
         jbtBack = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtblDeliveryMan = new javax.swing.JTable();
+        jtfDeliveryManID = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         selectPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Select Delivery Man", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
 
         jLabel1.setText("Delivery Man ID");
+
+        jbtView.setText("View");
+        jbtView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtViewActionPerformed(evt);
+            }
+        });
+
+        jbtRefresh.setText("Refresh");
+        jbtRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtRefreshActionPerformed(evt);
+            }
+        });
+
+        jbtBack.setText("Back");
+        jbtBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtBackActionPerformed(evt);
+            }
+        });
 
         jtblDeliveryMan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -62,42 +90,41 @@ public class ManageDeliveryman extends javax.swing.JFrame {
                 {null, null}
             },
             new String [] {
-                "ID", "Name"
+                "Deliveryman ID", "Name"
             }
-        ));
-        jScrollPane1.setViewportView(jtblDeliveryMan);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
 
-        jbtView.setText("View");
-
-        jbtRefresh.setText("Refresh");
-
-        jbtBack.setText("Back");
-        jbtBack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtBackActionPerformed(evt);
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
+        jScrollPane1.setViewportView(jtblDeliveryMan);
+        if (jtblDeliveryMan.getColumnModel().getColumnCount() > 0) {
+            jtblDeliveryMan.getColumnModel().getColumn(1).setResizable(false);
+        }
 
         javax.swing.GroupLayout selectPanelLayout = new javax.swing.GroupLayout(selectPanel);
         selectPanel.setLayout(selectPanelLayout);
         selectPanelLayout.setHorizontalGroup(
             selectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, selectPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, selectPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(jtfDeliveryManID, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jtfDeliveryManID)
                 .addGap(18, 18, 18)
                 .addComponent(jbtView)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(30, 30, 30)
                 .addGroup(selectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jbtBack)
                     .addComponent(jbtRefresh))
                 .addGap(23, 23, 23))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, selectPanelLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         selectPanelLayout.setVerticalGroup(
             selectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -106,11 +133,11 @@ public class ManageDeliveryman extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addGroup(selectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jtfDeliveryManID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbtView)
-                    .addComponent(jbtRefresh))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtRefresh)
+                    .addComponent(jtfDeliveryManID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -118,7 +145,7 @@ public class ManageDeliveryman extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(selectPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -127,8 +154,8 @@ public class ManageDeliveryman extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(selectPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(selectPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(251, Short.MAX_VALUE))
         );
 
         pack();
@@ -137,6 +164,30 @@ public class ManageDeliveryman extends javax.swing.JFrame {
     private void jbtBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtBackActionPerformed
         dispose();
     }//GEN-LAST:event_jbtBackActionPerformed
+
+    private void jbtViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtViewActionPerformed
+        String inputID = jtfDeliveryManID.getText();
+        boolean found = activeList.searchRecord(inputID);
+
+        if(found)
+        {
+            new UpdateDetails(inputID).setVisible(true);
+
+        }else
+            JOptionPane.showMessageDialog(null,"Invalid ID number.Please try again.");
+        
+    }//GEN-LAST:event_jbtViewActionPerformed
+
+    private void jbtRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtRefreshActionPerformed
+        
+        this.jtfDeliveryManID.setText("");
+        activeList = deliverymanList.getActiveRecord();
+        System.out.println(activeList);
+        model = new ActiveTableModel(activeList);
+        
+        
+        this.jtblDeliveryMan.setModel(model);
+    }//GEN-LAST:event_jbtRefreshActionPerformed
 
     /**
      * @param args the command line arguments

@@ -1,7 +1,7 @@
 package ADT;
 
 
-import Client.DeliveryManRegistration;
+import Client.HomePage;
 import Entity.Deliveryman;
 import Interface.DeliverymanInterface;
 
@@ -19,8 +19,8 @@ public class LDeliveryman<T> implements DeliverymanInterface<T> {
     
     private Node firstNode; // reference to first node
     private int numberOfEntries; // number of entries in list
-    //private static int counter;
     
+    //private static int counter;
     public LDeliveryman() {
         clear();
     }
@@ -45,10 +45,23 @@ public class LDeliveryman<T> implements DeliverymanInterface<T> {
         
         return true;
     }
-
+    
+    
     @Override
-    public boolean updateRecord(T oldDeliveryman, T newDeliveryman) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean updateRecord(int givenPosition, T newDeliveryman) {
+        boolean isSuccessful = true;
+
+        if ((givenPosition >= 1) && (givenPosition <= numberOfEntries)) {
+          Node currentNode = firstNode;
+          for (int i = 0; i < givenPosition - 1; ++i) {
+            currentNode = currentNode.next;		// advance currentNode to next node
+          }
+          currentNode.data = newDeliveryman;	// currentNode is pointing to the node at givenPosition
+        } else {
+          isSuccessful = false;
+        }
+
+        return isSuccessful;
     }
 
     @Override
@@ -72,14 +85,12 @@ public class LDeliveryman<T> implements DeliverymanInterface<T> {
     public DeliverymanInterface<Deliveryman> getActiveRecord() {
         
         DeliverymanInterface<Deliveryman> activeList = new LDeliveryman<>();
-        if(!DeliveryManRegistration.deliverymanList.isEmpty()){
+        if(!HomePage.deliverymanList.isEmpty()){
+            System.out.println("LD:" + HomePage.deliverymanList);
             Node currentNode = firstNode;
             for(int i = 0; i < numberOfEntries; i++){
-                
                 Deliveryman deliveryman = (Deliveryman)currentNode.data;
-
                 String status = deliveryman.getStatus();
-
                 if(status.equals("Full-Time") || status.equals("Part-Time")){
                      activeList.addRecord(deliveryman);
                 }
@@ -94,15 +105,17 @@ public class LDeliveryman<T> implements DeliverymanInterface<T> {
     public boolean searchRecord(String id) {
         
         boolean found = false;
+        Node currentNode = firstNode;
         for(int i = 0; i < numberOfEntries; i++) {
-          Node currentNode = firstNode;
+          
           Deliveryman deliveryman = (Deliveryman)currentNode.data;
           String deliverymanID = deliveryman.getDeliveryManID();
           if(deliverymanID.equals(id)){
             found = true;
           }
-          else
-            found = false;
+          else{
+              currentNode = currentNode.next;
+          }
         }
         
         return found;
@@ -172,6 +185,25 @@ public class LDeliveryman<T> implements DeliverymanInterface<T> {
     return result;
     }
     
+    public int getPosition(String id){
+       
+        int position = 0;
+        Node currentNode = firstNode;
+        for(int i = 1; i <= numberOfEntries; i++) {
+         
+          Deliveryman deliveryman = (Deliveryman)currentNode.data;
+          String deliverymanID = deliveryman.getDeliveryManID();
+          if(deliverymanID.equals(id)){
+            position = i;
+            break;
+          }
+          else
+              currentNode = currentNode.next;
+        }
+        
+        return position;
+        
+    }
     public String toString() {
         String outputStr = "";
         Node currentNode = firstNode;
@@ -183,8 +215,33 @@ public class LDeliveryman<T> implements DeliverymanInterface<T> {
     }
 
     @Override
-    public DeliverymanInterface getRecord(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public T getRecord(String inputID) {
+        
+        T result = null;
+        
+        if(HomePage.deliverymanList.isEmpty()){// if empty list
+        
+            result = null;
+        } else {                       
+            Node currentNode = firstNode;	// traverse linked list with p pointing to the current node
+            for(int i = 0; i < numberOfEntries; i++){
+                
+                Deliveryman deliveryman = (Deliveryman)currentNode.data;
+
+                String id = deliveryman.getDeliveryManID();
+
+                if(id.equals(inputID))
+                    result = currentNode.data;
+                else
+                    currentNode = currentNode.next;
+        
+            }
+            
+            
+        }
+        
+        return result;
+  
     }
     
     private class Node {
