@@ -22,7 +22,7 @@ public interface DeliverymanInterface<T> {
     T getLast();
     boolean searchRecord(String id);
     int getNumberOfEntries();
-    T get(int row);
+    T get(int givenPosition);
     int getPosition(String id);
     
 }

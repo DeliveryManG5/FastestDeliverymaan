@@ -89,7 +89,7 @@ public class CheckPendingDelivery extends javax.swing.JFrame {
                 {null, null, null}
             },
             new String [] {
-                "ID", "Name", "Order ID"
+                "Deliveryman ID", "Name", "Order ID"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -103,6 +103,7 @@ public class CheckPendingDelivery extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jtblPendingDelivery);
         if (jtblPendingDelivery.getColumnModel().getColumnCount() > 0) {
             jtblPendingDelivery.getColumnModel().getColumn(0).setResizable(false);
+            jtblPendingDelivery.getColumnModel().getColumn(1).setResizable(false);
             jtblPendingDelivery.getColumnModel().getColumn(2).setResizable(false);
         }
 
