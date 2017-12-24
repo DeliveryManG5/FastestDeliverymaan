@@ -5,9 +5,11 @@
  */
 package Client;
 
+import ADT.LDelivery;
 import ADT.LDeliveryman;
 import Entity.Delivery;
 import Entity.Deliveryman;
+import Interface.DeliveryInterface;
 import Interface.DeliverymanInterface;
 
 /**
@@ -17,7 +19,8 @@ import Interface.DeliverymanInterface;
 public class HomePage extends javax.swing.JFrame {
     
     public static DeliverymanInterface<Deliveryman> deliverymanList = new LDeliveryman<>();
-    public static DeliverymanInterface<Delivery> deliveryList = new LDeliveryman<>();
+    //public static DeliverymanInterface<Delivery> deliveryList = new LDeliveryman<>();
+    public static DeliveryInterface<Delivery> deliveryList = new LDelivery<>();
     /**
      * Creates new form HomePage
      */
@@ -26,9 +29,9 @@ public class HomePage extends javax.swing.JFrame {
         Deliveryman newDeliveryMan1 = new Deliveryman("D1001","QY","971008-56-5092","012-2222222","qy@gmail.com","test","23/12/2017",null,"Part-Time");
         Deliveryman newDeliveryMan2 = new Deliveryman("D1002","WZ","950518-56-5092","012-3333333","wz@gmail.com","test","23/12/2017",null,"Full-Time");
         Deliveryman newDeliveryMan3 = new Deliveryman("D1003","WS","952133-56-5092","012-2222222","ws@gmail.com","test","23/12/2017",null,"Retired");
-        Delivery delivery1 = new Delivery("D1001","QY",null);
-        Delivery delivery2 = new Delivery("D1002","WZ","O1001");
-        Delivery delivery3 = new Delivery("D1003","WS","O1002");
+        Delivery delivery1 = new Delivery("D1001","QY","0","0","0");
+        Delivery delivery2 = new Delivery("D1002","WZ","O1001","cust1","address1");
+        Delivery delivery3 = new Delivery("D1003","WS","O1002","cust2","address2");
         deliverymanList.addRecord(newDeliveryMan1);
         deliverymanList.addRecord(newDeliveryMan2);
         deliverymanList.addRecord(newDeliveryMan3);

@@ -1,17 +1,19 @@
 
 package TableModel;
 
+import ADT.LDelivery;
 import ADT.LDeliveryman;
 import Entity.Delivery;
+import Interface.DeliveryInterface;
 //import Entity.Deliveryman;
 import Interface.DeliverymanInterface;
 import javax.swing.table.AbstractTableModel;
 
 public class PendingTableModel extends AbstractTableModel {
-    private DeliverymanInterface<Delivery> contents = new LDeliveryman<>();
+    private DeliveryInterface<Delivery> contents = new LDelivery<>();
     String [] columns = {"Deliveryman ID","Name","Order ID"}; 
     
-    public PendingTableModel(DeliverymanInterface<Delivery> contents){
+    public PendingTableModel(DeliveryInterface<Delivery> contents){
         this.contents = contents;
     }
     

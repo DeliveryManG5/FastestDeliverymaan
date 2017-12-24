@@ -13,16 +13,23 @@ public class Delivery {
     String deliverymanID;
     String deliverymanName;
     String OrderID;
+    String custName;
+    String deliveryAddress;
 
     public Delivery() {
     }
 
-    public Delivery(String deliverymanID, String deliverymanName, String OrderID) {
+    public Delivery(String deliverymanID, String deliverymanName, String OrderID, String custName, String deliveryAddress) {
         this.deliverymanID = deliverymanID;
         this.deliverymanName = deliverymanName;
         this.OrderID = OrderID;
+        this.custName = custName;
+        this.deliveryAddress = deliveryAddress;
     }
 
+    
+
+    
     public String getDeliverymanID() {
         return deliverymanID;
     }
@@ -33,6 +40,14 @@ public class Delivery {
 
     public String getOrderID() {
         return OrderID;
+    }
+
+    public String getCustName() {
+        return custName;
+    }
+
+    public String getDeliveryAddress() {
+        return deliveryAddress;
     }
 
     public void setDeliverymanID(String deliverymanID) {
@@ -46,6 +61,21 @@ public class Delivery {
     public void setOrderID(String OrderID) {
         this.OrderID = OrderID;
     }
+
+    public void setCustName(String custName) {
+        this.custName = custName;
+    }
+
+    public void setDeliveryAddress(String deliveryAddress) {
+        this.deliveryAddress = deliveryAddress;
+    }
+
+    @Override
+    public String toString() {
+        return "Delivery{" + "deliverymanID=" + deliverymanID + ", deliverymanName=" + deliverymanName + ", OrderID=" + OrderID + ", custName=" + custName + ", deliveryAddress=" + deliveryAddress + '}';
+    }
+    
+    
     
     
 }
