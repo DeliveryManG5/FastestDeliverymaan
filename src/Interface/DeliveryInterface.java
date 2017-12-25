@@ -5,20 +5,26 @@
  */
 package Interface;
 
+import Entity.Delivery;
+import javafx.scene.Node;
+
 /**
  *
  * @author ADmin
  */
 public interface DeliveryInterface<T> {
     boolean addRecord(T newDetails);
-    
     boolean searchRecord(String id);
     boolean isEmpty();
     T getRecord(String inputID);
-    
     DeliveryInterface getPendingRecord();
     boolean searchOrder(String id);
     int getNumberOfEntries();
     T get(int givenPosition);
-     public String toString();
+    String toString();
+    DeliveryInterface<Delivery> getReportRecord();
+    boolean addRecord(int newPosition, T newEntry);
+    T getLast();
+    void insertionSort();
+    void insertInOrder(Node nodeToInsert);
 }

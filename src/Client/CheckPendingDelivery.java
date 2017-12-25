@@ -20,38 +20,11 @@ public class CheckPendingDelivery extends javax.swing.JFrame {
     public CheckPendingDelivery() {
         initComponents();
         this.setTitle("Check Deliveryman Status");
-        String[] tableColumnsName1 = {"DeliveryManID", "Name","OrderID"};
         pendingList = deliveryList.getPendingRecord();
       
         model = new PendingTableModel(pendingList);
-        
-        
         this.jtblPendingDelivery.setModel(model);
-      
-      /**      
-            String[] tableColumnsName2 = {"DeliveryManID", "Name"};
-            DefaultTableModel mode2 = (DefaultTableModel) jtblFreeDeliveryMan.getModel();
-            mode2.setColumnIdentifiers(tableColumnsName2);
-            mode2.setRowCount(0);
-            ResultSet rs2 = deliveryManDA.selectAvailable();
-        
-             
-            try {                   
-                ResultSetMetaData rsmd = rs2.getMetaData();
-                
-                    int colNo = rsmd.getColumnCount();
-                    while(rs2.next()){
-                        Object[] objects = new Object[colNo];
-                        for(int i = 0; i < colNo; i++){
-                            objects[i] = rs2.getObject(i+1);
-                        }
-                        mode2.addRow(objects);
-                    }
-                    jtblFreeDeliveryMan.setModel(mode2);
-
-            } catch (SQLException ex) {
-                Logger.getLogger(SelectToUpdate.class.getName()).log(Level.SEVERE, null, ex);
-            }**/
+     
     }
 
     /**
@@ -68,9 +41,6 @@ public class CheckPendingDelivery extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jtblPendingDelivery = new javax.swing.JTable();
         jbtRefresh = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jtblFreeDeliveryMan = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         jtfOrderID = new javax.swing.JTextField();
         jbtView = new javax.swing.JButton();
@@ -114,33 +84,6 @@ public class CheckPendingDelivery extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Available Deliveryman");
-
-        jtblFreeDeliveryMan.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "ID", "Name"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane2.setViewportView(jtblFreeDeliveryMan);
-        if (jtblFreeDeliveryMan.getColumnModel().getColumnCount() > 0) {
-            jtblFreeDeliveryMan.getColumnModel().getColumn(0).setResizable(false);
-            jtblFreeDeliveryMan.getColumnModel().getColumn(1).setResizable(false);
-        }
-
         jLabel3.setText("Order ID");
 
         jbtView.setText("View");
@@ -158,10 +101,8 @@ public class CheckPendingDelivery extends javax.swing.JFrame {
                 .addGap(59, 59, 59)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel2)
                         .addComponent(jLabel1)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -185,11 +126,7 @@ public class CheckPendingDelivery extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -205,8 +142,8 @@ public class CheckPendingDelivery extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         pack();
@@ -267,14 +204,11 @@ public class CheckPendingDelivery extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton jbtRefresh;
     private javax.swing.JButton jbtView;
-    private javax.swing.JTable jtblFreeDeliveryMan;
     private javax.swing.JTable jtblPendingDelivery;
     private javax.swing.JTextField jtfOrderID;
     // End of variables declaration//GEN-END:variables

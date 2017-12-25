@@ -15,21 +15,27 @@ public class Delivery {
     String OrderID;
     String custName;
     String deliveryAddress;
+    int numOfDelivery;
+    double totalDistance;
 
     public Delivery() {
     }
 
-    public Delivery(String deliverymanID, String deliverymanName, String OrderID, String custName, String deliveryAddress) {
+    public Delivery(String deliverymanID, String deliverymanName, String OrderID, String custName, String deliveryAddress, int numOfDelivery, double totalDistance) {
         this.deliverymanID = deliverymanID;
         this.deliverymanName = deliverymanName;
         this.OrderID = OrderID;
         this.custName = custName;
         this.deliveryAddress = deliveryAddress;
+        this.numOfDelivery = numOfDelivery;
+        this.totalDistance = totalDistance;
     }
 
     
 
-    
+
+   
+
     public String getDeliverymanID() {
         return deliverymanID;
     }
@@ -50,6 +56,16 @@ public class Delivery {
         return deliveryAddress;
     }
 
+    public int getNumOfDelivery() {
+        return numOfDelivery;
+    }
+
+    public double getTotalDistance() {
+        return totalDistance;
+    }
+
+
+    
     public void setDeliverymanID(String deliverymanID) {
         this.deliverymanID = deliverymanID;
     }
@@ -70,10 +86,21 @@ public class Delivery {
         this.deliveryAddress = deliveryAddress;
     }
 
+    public void setNumOfDelivery(int numOfDelivery) {
+        this.numOfDelivery = numOfDelivery;
+    }
+
+    public void setTotalDistance(double totalDistance) {
+        this.totalDistance = totalDistance;
+    }
+
     @Override
     public String toString() {
-        return "Delivery{" + "deliverymanID=" + deliverymanID + ", deliverymanName=" + deliverymanName + ", OrderID=" + OrderID + ", custName=" + custName + ", deliveryAddress=" + deliveryAddress + '}';
+        return "Delivery{" + "deliverymanID=" + deliverymanID + ", deliverymanName=" + deliverymanName + ", OrderID=" + OrderID + ", custName=" + custName + ", deliveryAddress=" + deliveryAddress + ", numOfDelivery=" + numOfDelivery + ", totalDistance=" + totalDistance + '}';
     }
+
+    
+
     
     
     

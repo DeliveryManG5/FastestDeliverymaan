@@ -30,6 +30,7 @@
                   <Group type="103" alignment="1" groupAlignment="0" attributes="0">
                       <Component id="jbtCheckPending" min="-2" max="-2" attributes="0"/>
                       <Component id="jbtSelectToUpdate" min="-2" max="-2" attributes="0"/>
+                      <Component id="jbtDailyReport" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="105" max="32767" attributes="0"/>
@@ -45,7 +46,9 @@
               <Component id="jbtSelectToUpdate" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jbtCheckPending" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="123" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jbtDailyReport" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="82" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -73,6 +76,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtCheckPendingActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jbtDailyReport">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Daily Report"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtDailyReportActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

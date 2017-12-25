@@ -16,6 +16,7 @@ public class LDeliveryman<T> implements DeliverymanInterface<T> {
         clear();
     }
     
+    // This method is to add new object into the list
     @Override
     public boolean addRecord(T newDetails) {
         
@@ -37,7 +38,7 @@ public class LDeliveryman<T> implements DeliverymanInterface<T> {
         return true;
     }
     
-    
+    // This method is to replace the specific object at the given position in the list 
     @Override
     public boolean updateRecord(int givenPosition, T newDeliveryman) {
         boolean isSuccessful = true;
@@ -55,11 +56,12 @@ public class LDeliveryman<T> implements DeliverymanInterface<T> {
         return isSuccessful;
     }
 
+    // This method is to generate new deliveryman ID
     @Override
     public String generateDeliverymanID() {
         
         String deliveryManID = null;
-        if(isEmpty()){
+        if(isEmpty()){  // when the list is Empty, the deliveryman will be assign to D1001
             deliveryManID = "D1001";
         }else{
             Deliveryman deliveryman = (Deliveryman)this.getLast();
@@ -71,7 +73,7 @@ public class LDeliveryman<T> implements DeliverymanInterface<T> {
        
     }
    
-   
+    // This method is to retrieve the deliveryman who are currently working in the FastestDeliveryman Sdn. Bhd.
     @Override
     public DeliverymanInterface<Deliveryman> getActiveRecord() {
         
@@ -112,17 +114,7 @@ public class LDeliveryman<T> implements DeliverymanInterface<T> {
         return found;
         
     }
-    
-    @Override
-    public DeliverymanInterface getPendingDelivery() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public DeliverymanInterface getAvailable() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+  
     @Override
     public final void clear() {
         firstNode = null;

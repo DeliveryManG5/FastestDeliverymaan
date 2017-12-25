@@ -9,6 +9,7 @@ import Client.HomePage;
 import Entity.Delivery;
 import Interface.DeliveryInterface;
 import Interface.DeliverymanInterface;
+import java.util.Collections;
 
 /**
  *
@@ -46,11 +47,12 @@ public class LDelivery<T> implements DeliveryInterface<T>  {
             System.out.println(HomePage.deliveryList);
           Delivery delivery = (Delivery)currentNode.data;
           String orderID = delivery.getOrderID();
-          if(orderID.equals(id)){
-            found = true;
+          
+          if(orderID == null || !orderID.equals(id)){
+            currentNode = currentNode.next;
           }
           else{
-              currentNode = currentNode.next;
+             found = true;
           }
         }
         
@@ -71,11 +73,10 @@ public class LDelivery<T> implements DeliveryInterface<T>  {
                 Delivery delivery = (Delivery)currentNode.data;
 
                 String id = delivery.getOrderID();
-
-                if(id.equals(inputID))
-                    result = currentNode.data;
-                else
+                if(id == null || !id.equals(inputID))
                     currentNode = currentNode.next;
+                else 
+                    result = currentNode.data;
         
             }
             
@@ -147,6 +148,53 @@ public class LDelivery<T> implements DeliveryInterface<T>  {
         return found;
         
     }
+    
+     
+//     public T getLast() {
+//        
+//        T result = null;
+//        
+//        if (isEmpty()) // if empty list
+//        {
+//            result = null;
+//        } else {                       
+//            Node currentNode = firstNode;	// traverse linked list with p pointing to the current node
+//            while (currentNode.next != null) {	// while have not reached the last node
+//                currentNode = currentNode.next;
+//            }
+//            result = currentNode.data;// currentNode is pointing to the last node
+//        }
+//        
+//        return result;
+//  
+//    }
+    @Override
+ public boolean addRecord(int newPosition, T newEntry) { 
+    boolean isSuccessful = true;
+
+    if ((newPosition >= 1) && (newPosition <= numberOfEntries + 1)) {
+      Node newNode = new Node(newEntry);
+
+      if (isEmpty() || (newPosition == 1)) {     // case 1: add to beginning of list
+        newNode.next = firstNode;
+        firstNode = newNode;
+      } else {								                      // case 2: list is not empty and newPosition > 1
+        Node nodeBefore = firstNode;
+        for (int i = 1; i < newPosition - 1; ++i) {
+          nodeBefore = nodeBefore.next;		// advance nodeBefore to its next node
+        }
+
+        newNode.next = nodeBefore.next;	// make new node point to current node at newPosition
+        nodeBefore.next = newNode;		// make the node before point to the new node
+      }
+
+      numberOfEntries++;
+    } else {
+      isSuccessful = false;
+    }
+
+    return isSuccessful;
+  }
      public String toString() {
         String outputStr = "";
         Node currentNode = firstNode;
@@ -156,6 +204,45 @@ public class LDelivery<T> implements DeliveryInterface<T>  {
         }
         return outputStr;
     }
+     public boolean updateRecord(int givenPosition, T newDelivery) {
+        boolean isSuccessful = true;
+
+        if ((givenPosition >= 1) && (givenPosition <= numberOfEntries)) {
+          Node currentNode = firstNode;
+          for (int i = 0; i < givenPosition - 1; ++i) {
+            currentNode = currentNode.next;		// advance currentNode to next node
+          }
+          currentNode.data = newDelivery;	// currentNode is pointing to the node at givenPosition
+        } else {
+          isSuccessful = false;
+        }
+
+        return isSuccessful;
+    }
+
+    @Override
+    public T getLast() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void insertionSort() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+
+    @Override
+    public void insertInOrder(javafx.scene.Node nodeToInsert) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public DeliveryInterface<Delivery> getReportRecord() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    
+
     private class Node {
 
         private T data;

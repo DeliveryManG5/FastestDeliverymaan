@@ -29,15 +29,19 @@ public class HomePage extends javax.swing.JFrame {
         Deliveryman newDeliveryMan1 = new Deliveryman("D1001","QY","971008-56-5092","012-2222222","qy@gmail.com","test","23/12/2017",null,"Part-Time");
         Deliveryman newDeliveryMan2 = new Deliveryman("D1002","WZ","950518-56-5092","012-3333333","wz@gmail.com","test","23/12/2017",null,"Full-Time");
         Deliveryman newDeliveryMan3 = new Deliveryman("D1003","WS","952133-56-5092","012-2222222","ws@gmail.com","test","23/12/2017",null,"Retired");
-        Delivery delivery1 = new Delivery("D1001","QY","0","0","0");
-        Delivery delivery2 = new Delivery("D1002","WZ","O1001","cust1","address1");
-        Delivery delivery3 = new Delivery("D1003","WS","O1002","cust2","address2");
+        Delivery delivery1 = new Delivery("D1001","QY",null,null,null,1,0);
+        Delivery delivery2 = new Delivery("D1002","WZ","O1001","cust1","address1",3,1);
+        Delivery delivery3 = new Delivery("D1003","WS","O1002","cust2","address2",2,4.4);
+        Delivery delivery4 = new Delivery("D1004","LOL",null,null,null,3,1);
+        Delivery delivery5 = new Delivery("D1005","WS","O1003","cust2","address2",1,3.5);
         deliverymanList.addRecord(newDeliveryMan1);
         deliverymanList.addRecord(newDeliveryMan2);
         deliverymanList.addRecord(newDeliveryMan3);
         deliveryList.addRecord(delivery1);
         deliveryList.addRecord(delivery2);
         deliveryList.addRecord(delivery3);
+        deliveryList.addRecord(delivery4);
+        deliveryList.addRecord(delivery5);
         
         System.out.println(deliverymanList);
         
@@ -55,6 +59,7 @@ public class HomePage extends javax.swing.JFrame {
         jbtRegistration = new javax.swing.JButton();
         jbtSelectToUpdate = new javax.swing.JButton();
         jbtCheckPending = new javax.swing.JButton();
+        jbtDailyReport = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -79,6 +84,13 @@ public class HomePage extends javax.swing.JFrame {
             }
         });
 
+        jbtDailyReport.setText("Daily Report");
+        jbtDailyReport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtDailyReportActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -89,7 +101,8 @@ public class HomePage extends javax.swing.JFrame {
                     .addComponent(jbtRegistration)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jbtCheckPending)
-                        .addComponent(jbtSelectToUpdate)))
+                        .addComponent(jbtSelectToUpdate)
+                        .addComponent(jbtDailyReport)))
                 .addContainerGap(105, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -101,7 +114,9 @@ public class HomePage extends javax.swing.JFrame {
                 .addComponent(jbtSelectToUpdate)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jbtCheckPending)
-                .addContainerGap(123, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jbtDailyReport)
+                .addContainerGap(82, Short.MAX_VALUE))
         );
 
         pack();
@@ -118,6 +133,10 @@ public class HomePage extends javax.swing.JFrame {
     private void jbtCheckPendingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtCheckPendingActionPerformed
         new CheckPendingDelivery().setVisible(true);
     }//GEN-LAST:event_jbtCheckPendingActionPerformed
+
+    private void jbtDailyReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtDailyReportActionPerformed
+        new DailyReport().setVisible(true);
+    }//GEN-LAST:event_jbtDailyReportActionPerformed
 
     /**
      * @param args the command line arguments
@@ -156,6 +175,7 @@ public class HomePage extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jbtCheckPending;
+    private javax.swing.JButton jbtDailyReport;
     private javax.swing.JButton jbtRegistration;
     private javax.swing.JButton jbtSelectToUpdate;
     // End of variables declaration//GEN-END:variables

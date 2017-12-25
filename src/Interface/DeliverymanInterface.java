@@ -15,8 +15,6 @@ public interface DeliverymanInterface<T> {
     String generateDeliverymanID();
     DeliverymanInterface getActiveRecord();
     T getRecord(String inputID);
-    DeliverymanInterface getPendingDelivery();
-    DeliverymanInterface getAvailable();
     void clear();
     boolean isEmpty();
     T getLast();
