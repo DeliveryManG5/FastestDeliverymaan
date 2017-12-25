@@ -36,6 +36,7 @@ public class Add extends javax.swing.JFrame {
    // private String food = " ";
    // private String Price = " ";
   //  private String a = " ";
+    //private String b = " ";
     public static ListInterface<MenuWS> foodList = new LListWS<>();
    
     private FoodTableModel model;
