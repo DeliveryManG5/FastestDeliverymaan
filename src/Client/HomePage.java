@@ -5,12 +5,19 @@
  */
 package Client;
 
+import ADT.LAttendance;
 import ADT.LDelivery;
 import ADT.LDeliveryman;
+import ADT.List;
+import Entity.Attendance;
+import Entity.Customer;
 import Entity.Delivery;
 import Entity.Deliveryman;
+import Entity.Payment;
+import Interface.AttendanceInterface;
 import Interface.DeliveryInterface;
 import Interface.DeliverymanInterface;
+import Interface.ListInterface;
 
 /**
  *
@@ -21,6 +28,10 @@ public class HomePage extends javax.swing.JFrame {
     public static DeliverymanInterface<Deliveryman> deliverymanList = new LDeliveryman<>();
     //public static DeliverymanInterface<Delivery> deliveryList = new LDeliveryman<>();
     public static DeliveryInterface<Delivery> deliveryList = new LDelivery<>();
+    public static ListInterface<Customer> customerList = new List<>();
+    
+    public static AttendanceInterface<Attendance> attendanceList = new LAttendance<>();
+    public static ListInterface<Payment> paymentList = new List<>();
     /**
      * Creates new form HomePage
      */
@@ -34,6 +45,15 @@ public class HomePage extends javax.swing.JFrame {
         Delivery delivery3 = new Delivery("D1003","WS","O1002","cust2","address2",2,4.4);
         Delivery delivery4 = new Delivery("D1004","LOL",null,null,null,3,1);
         Delivery delivery5 = new Delivery("D1005","WS","O1003","cust2","address2",1,3.5);
+        Attendance newAttendance1 = new Attendance("D1001","QY",null,null,"Available",null);
+        Attendance newAttendance2 = new Attendance("D1002","WZ",null,null,"Available",null);
+        Attendance newAttendance3 = new Attendance("D1003","Bryan",null,null,"Available",null);
+        Attendance newAttendance4 = new Attendance("D1004","WS",null,null,"Available",null);
+        Customer customer1 = new Customer("C1001", "Lee", "019-1111111", "No.28 Hemingway Jalan Serdang", "leez-wa15@gmail.com");
+        Customer customer2 = new Customer("C1001", "Lee", "019-2111111", "No.28 Hemingway Jalan Serdang", "leez-wa15@gmail.com");
+
+        customerList.add(customer1);  
+        customerList.add(customer2);
         deliverymanList.addRecord(newDeliveryMan1);
         deliverymanList.addRecord(newDeliveryMan2);
         deliverymanList.addRecord(newDeliveryMan3);
@@ -42,7 +62,10 @@ public class HomePage extends javax.swing.JFrame {
         deliveryList.addRecord(delivery3);
         deliveryList.addRecord(delivery4);
         deliveryList.addRecord(delivery5);
-        
+        attendanceList.addRecord(newAttendance1);
+        attendanceList.addRecord(newAttendance2);
+        attendanceList.addRecord(newAttendance3);
+        attendanceList.addRecord(newAttendance4);
         System.out.println(deliverymanList);
         
     }
@@ -56,12 +79,78 @@ public class HomePage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jButton2 = new javax.swing.JButton();
+        jbtnAssignJob = new javax.swing.JButton();
+        jbtnClockIn = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
         jbtRegistration = new javax.swing.JButton();
         jbtSelectToUpdate = new javax.swing.JButton();
         jbtCheckPending = new javax.swing.JButton();
         jbtDailyReport = new javax.swing.JButton();
+        jbtMenu = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jButton2.setText("Check Remaining Time");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jbtnAssignJob.setText("Assign Job");
+        jbtnAssignJob.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnAssignJobActionPerformed(evt);
+            }
+        });
+
+        jbtnClockIn.setText("ClockIn ClockOut");
+        jbtnClockIn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnClockInActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("TrackStatus");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addComponent(jbtnAssignJob)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(28, 28, 28))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(jbtnClockIn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbtnAssignJob)
+                    .addComponent(jButton1))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbtnClockIn)
+                    .addComponent(jButton2))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         jbtRegistration.setText("Register Deliveryman");
         jbtRegistration.addActionListener(new java.awt.event.ActionListener() {
@@ -91,32 +180,71 @@ public class HomePage extends javax.swing.JFrame {
             }
         });
 
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jbtSelectToUpdate)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jbtDailyReport)
+                .addGap(37, 37, 37))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jbtRegistration)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addComponent(jbtCheckPending)
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbtRegistration)
+                    .addComponent(jbtCheckPending))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbtSelectToUpdate)
+                    .addComponent(jbtDailyReport))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jbtMenu.setText("Menu");
+        jbtMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtMenuActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(144, 144, 144)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jbtRegistration)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jbtCheckPending)
-                        .addComponent(jbtSelectToUpdate)
-                        .addComponent(jbtDailyReport)))
-                .addContainerGap(105, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(58, 58, 58)
+                .addComponent(jbtMenu)
+                .addContainerGap(232, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(71, 71, 71)
-                .addComponent(jbtRegistration)
-                .addGap(26, 26, 26)
-                .addComponent(jbtSelectToUpdate)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jbtCheckPending)
-                .addGap(18, 18, 18)
-                .addComponent(jbtDailyReport)
-                .addContainerGap(82, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jbtMenu)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46))
         );
 
         pack();
@@ -137,6 +265,26 @@ public class HomePage extends javax.swing.JFrame {
     private void jbtDailyReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtDailyReportActionPerformed
         new DailyReport().setVisible(true);
     }//GEN-LAST:event_jbtDailyReportActionPerformed
+
+    private void jbtnAssignJobActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAssignJobActionPerformed
+        new AssignDeliveryJob().setVisible(true);
+    }//GEN-LAST:event_jbtnAssignJobActionPerformed
+
+    private void jbtnClockInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnClockInActionPerformed
+        new ClockInClockOut().setVisible(true);
+    }//GEN-LAST:event_jbtnClockInActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        new TrackStatus().setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        new ViewRemainingTime().setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jbtMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtMenuActionPerformed
+        new Restaurant().setVisible(true);
+    }//GEN-LAST:event_jbtMenuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -174,9 +322,16 @@ public class HomePage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JButton jbtCheckPending;
     private javax.swing.JButton jbtDailyReport;
+    private javax.swing.JButton jbtMenu;
     private javax.swing.JButton jbtRegistration;
     private javax.swing.JButton jbtSelectToUpdate;
+    private javax.swing.JButton jbtnAssignJob;
+    private javax.swing.JButton jbtnClockIn;
     // End of variables declaration//GEN-END:variables
 }

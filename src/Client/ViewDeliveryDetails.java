@@ -14,8 +14,13 @@ package Client;
 
 
 
+import Entity.Attendance;
+import Entity.Customer;
 import Entity.Delivery;
+import Entity.Payment;
+import Interface.AttendanceInterface;
 import Interface.DeliveryInterface;
+import Interface.ListInterface;
 
 public class ViewDeliveryDetails extends javax.swing.JFrame {
    
@@ -23,8 +28,11 @@ public class ViewDeliveryDetails extends javax.swing.JFrame {
      * Creates new form ViewCustomerDetails
      */
     private String deliveryID;
-    public static DeliveryInterface<Delivery> deliveryList = HomePage.deliveryList;
-    private Delivery delivery;
+    public static AttendanceInterface<Attendance> attendanceList = HomePage.attendanceList;
+    public static ListInterface<Payment> FoodList = HomePage.paymentList;
+    public static ListInterface<Customer> custList = HomePage.customerList;
+    private Customer customer;
+    private Payment payment;
     private String orderID;
     private String custName;
     private String deliveryAdd;
@@ -34,13 +42,16 @@ public class ViewDeliveryDetails extends javax.swing.JFrame {
         
         this.setTitle("View Delivery Details");
         orderID = id;
-        boolean found = deliveryList.searchRecord(orderID);
+        boolean found = attendanceList.searchOrder(orderID);
         
             if(found){
-                delivery = (Delivery)deliveryList.getRecord(orderID);
-                orderID = delivery.getOrderID();
-                custName = delivery.getCustName();
-                deliveryAdd = delivery.getDeliveryAddress();
+                payment = (Payment)FoodList.getOrderRecord(orderID);
+                String custID = payment.getCustID(); 
+                customer = (Customer)custList.getCustID(custID);
+                
+                
+                custName = customer.getCustName();
+                deliveryAdd = customer.getAddress();
                 
                jtfOrderID.setText(orderID);
                jtfCustName.setText(custName);

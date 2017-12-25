@@ -1,19 +1,22 @@
 
 package TableModel;
 
+import ADT.LAttendance;
 import ADT.LDelivery;
 import ADT.LDeliveryman;
+import Entity.Attendance;
 import Entity.Delivery;
+import Interface.AttendanceInterface;
 import Interface.DeliveryInterface;
 //import Entity.Deliveryman;
 import Interface.DeliverymanInterface;
 import javax.swing.table.AbstractTableModel;
 
 public class PendingTableModel extends AbstractTableModel {
-    private DeliveryInterface<Delivery> contents = new LDelivery<>();
+    private AttendanceInterface<Attendance> contents = new LAttendance<>();
     String [] columns = {"Deliveryman ID","Name","Order ID"}; 
     
-    public PendingTableModel(DeliveryInterface<Delivery> contents){
+    public PendingTableModel(AttendanceInterface<Attendance> contents){
         this.contents = contents;
     }
     
@@ -37,10 +40,10 @@ public class PendingTableModel extends AbstractTableModel {
         String name = null;
         String orderID = null;
         row++;
-            Delivery delivery = (Delivery) contents.get(row);
-             deliverymanID = delivery.getDeliverymanID();
-             name = delivery.getDeliverymanName();
-             orderID = delivery.getOrderID();
+            Attendance attendance = (Attendance) contents.get(row);
+             deliverymanID = attendance.getDeliverymanID();
+             name = attendance.getName();
+             orderID = attendance.getOrderID();
         if(column == 0)
             return deliverymanID;
         else if(column == 1)

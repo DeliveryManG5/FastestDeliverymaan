@@ -5,9 +5,12 @@
  */
 package ADT;
 
+import Client.HomePage;
 import Client.TrackStatus;
 import Entity.Attendance;
+import Entity.Delivery;
 import Interface.AttendanceInterface;
+import Interface.DeliveryInterface;
 
 /**
  *
@@ -40,7 +43,75 @@ public class LAttendance<T> implements AttendanceInterface<T> {
         return statusList;
         
     }
+    public boolean searchRecord(String id) {
+        
+        boolean found = false;
+        Node currentNode = firstNode;
+        for(int i = 0; i < numberOfEntries; i++) {
+          
+          Attendance attendance = (Attendance)currentNode.data;
+          String deliverymanID = attendance.getDeliverymanID();
+          if(deliverymanID.equals(id)){
+            found = true;
+          }
+          else{
+              currentNode = currentNode.next;
+          }
+        }
+        
+        return found;
+    }
     
+     public boolean searchOrder(String id) {
+        
+        boolean found = false;
+        Node currentNode = firstNode;
+        for(int i = 0; i < numberOfEntries; i++) {
+          
+          Attendance attendance = (Attendance)currentNode.data;
+          String orderID = attendance.getOrderID();
+          if(orderID == null){
+            currentNode = currentNode.next;
+          }
+          else if(orderID.equals(id)){
+            found = true;
+          }
+          else{
+              currentNode = currentNode.next;
+          }
+        }
+        
+        return found;
+        
+    }
+    public T getRecord(String inputID) {
+        
+        T result = null;
+        
+        if(HomePage.attendanceList.isEmpty()){// if empty list
+        
+            result = null;
+        } else {                       
+            Node currentNode = firstNode;	// traverse linked list with p pointing to the current node
+            for(int i = 0; i < numberOfEntries; i++){
+                
+                Attendance attendance = (Attendance)currentNode.data;
+
+                String id = attendance.getDeliverymanID();
+
+                if(id.equals(inputID))
+                    result = currentNode.data;
+                else
+                    currentNode = currentNode.next;
+        
+            }
+            
+            
+        }
+        
+        return result;
+  
+    }
     public boolean addRecord(T newDetails) {
         
         Node newNode = new Node(newDetails);	// create the new node
@@ -84,8 +155,76 @@ public class LAttendance<T> implements AttendanceInterface<T> {
 
     return result;
     }
+    public int getPosition(String id){
+       
+        int position = 0;
+        Node currentNode = firstNode;
+        for(int i = 1; i <= numberOfEntries; i++) {
+         
+          Attendance attendance = (Attendance)currentNode.data;
+          String deliverymanID = attendance.getDeliverymanID();
+          if(deliverymanID.equals(id)){
+            position = i;
+            break;
+          }
+          else
+              currentNode = currentNode.next;
+        }
+        
+        return position;
+        
+    }
+    public boolean updateRecord(int givenPosition, T newAttendance) {
+        boolean isSuccessful = true;
+
+        if ((givenPosition >= 1) && (givenPosition <= numberOfEntries)) {
+          Node currentNode = firstNode;
+          for (int i = 0; i < givenPosition - 1; ++i) {
+            currentNode = currentNode.next;		// advance currentNode to next node
+          }
+          currentNode.data = newAttendance;	// currentNode is pointing to the node at givenPosition
+        } else {
+          isSuccessful = false;
+        }
+
+        return isSuccessful;
+    }
+    public AttendanceInterface filterStatus() {        
+        AttendanceInterface<Attendance> statusList = new LAttendance<>();
+        if(!TrackStatus.attendanceList.isEmpty()){
+            
+            Node currentNode = firstNode;
+            for(int i = 0; i < numberOfEntries; i++){
+                Attendance attendance = (Attendance)currentNode.data;
+                String orderID = attendance.getOrderID();
+                if(orderID == null){
+                     statusList.addRecord(attendance);
+                }
+                currentNode = currentNode.next;
+            }
+        }
+        return statusList;  
+    }
+    
     public boolean isEmpty() {
         return firstNode == null;
+    }
+
+    public AttendanceInterface<Attendance> getPendingRecord() {
+        AttendanceInterface<Attendance> pendingList = new LAttendance<>();
+        if(!HomePage.attendanceList.isEmpty()){
+            Node currentNode = firstNode;
+            for(int i = 0; i < numberOfEntries; i++){
+                Attendance attendance = (Attendance)currentNode.data;
+                String orderID = attendance.getOrderID();
+                if(orderID != null){
+                     pendingList.addRecord(attendance);
+                }
+                currentNode = currentNode.next;
+        
+            }
+        }
+        return pendingList;    
     }
     private class Node {
 

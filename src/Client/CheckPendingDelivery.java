@@ -1,8 +1,11 @@
 package Client;
 
+import ADT.LAttendance;
 import ADT.LDelivery;
 import ADT.LDeliveryman;
+import Entity.Attendance;
 import Entity.Delivery;
+import Interface.AttendanceInterface;
 import Interface.DeliveryInterface;
 import Interface.DeliverymanInterface;
 
@@ -14,13 +17,13 @@ import javax.swing.JOptionPane;
 public class CheckPendingDelivery extends javax.swing.JFrame {
     
     
-    public static DeliveryInterface<Delivery> deliveryList = HomePage.deliveryList;
-    private DeliveryInterface<Delivery> pendingList = new LDelivery<>();   
+    public static AttendanceInterface<Attendance> attendanceList = HomePage.attendanceList;
+    private AttendanceInterface<Attendance> pendingList = new LAttendance<>();   
     private PendingTableModel model;
     public CheckPendingDelivery() {
         initComponents();
         this.setTitle("Check Deliveryman Status");
-        pendingList = deliveryList.getPendingRecord();
+        pendingList = attendanceList.getPendingRecord();
       
         model = new PendingTableModel(pendingList);
         this.jtblPendingDelivery.setModel(model);
@@ -150,7 +153,7 @@ public class CheckPendingDelivery extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtRefreshActionPerformed
-      pendingList = deliveryList.getPendingRecord();
+       pendingList = attendanceList.getPendingRecord();
         model = new PendingTableModel(pendingList);
         this.jtblPendingDelivery.setModel(model);
     }//GEN-LAST:event_jbtRefreshActionPerformed

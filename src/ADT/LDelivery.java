@@ -6,7 +6,9 @@
 package ADT;
 
 import Client.HomePage;
+import Entity.Attendance;
 import Entity.Delivery;
+import Interface.AttendanceInterface;
 import Interface.DeliveryInterface;
 import Interface.DeliverymanInterface;
 import java.util.Collections;
@@ -91,15 +93,15 @@ public class LDelivery<T> implements DeliveryInterface<T>  {
     }
 
     @Override
-    public DeliveryInterface getPendingRecord() {
-        DeliveryInterface<Delivery> pendingList = new LDelivery<>();
-        if(!HomePage.deliveryList.isEmpty()){
+    public AttendanceInterface getPendingRecord() {        
+        AttendanceInterface<Attendance> pendingList = new LAttendance<>();
+        if(!HomePage.attendanceList.isEmpty()){
             Node currentNode = firstNode;
             for(int i = 0; i < numberOfEntries; i++){
-                Delivery delivery = (Delivery)currentNode.data;
-                String orderID = delivery.getOrderID();
+                Attendance attendance = (Attendance)currentNode.data;
+                String orderID = attendance.getOrderID();
                 if(orderID != null){
-                     pendingList.addRecord(delivery);
+                     pendingList.addRecord(attendance);
                 }
                 currentNode = currentNode.next;
         

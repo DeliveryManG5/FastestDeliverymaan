@@ -17,7 +17,7 @@ public interface DeliveryInterface<T> {
     boolean searchRecord(String id);
     boolean isEmpty();
     T getRecord(String inputID);
-    DeliveryInterface getPendingRecord();
+    AttendanceInterface getPendingRecord();
     boolean searchOrder(String id);
     int getNumberOfEntries();
     T get(int givenPosition);

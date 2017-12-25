@@ -8,23 +8,23 @@ import TableModel.StatusTableModel;
 import javax.swing.JOptionPane;
 
 public class TrackStatus extends javax.swing.JFrame {
-    public static AttendanceInterface<Attendance> attendanceList = new LAttendance();
+    public static AttendanceInterface<Attendance> attendanceList = HomePage.attendanceList;
     private AttendanceInterface<Attendance> statusList = new LAttendance();
    
     private StatusTableModel model;
     
     public TrackStatus() {
         initComponents();
-        Attendance attendance1 = new Attendance("D1001","qy", "11am",null, "Available");
-        Attendance attendance2 = new Attendance("D1002","wz", "11am",null, "Break");
-        Attendance attendance3 = new Attendance("D1003","ws", "11am",null, "Break");
-        Attendance attendance4 = new Attendance("D1004","lucian", "11am",null, "Delivery");
-        Attendance attendance5 = new Attendance("D1005","bryan", "11am",null, "Break");
-        attendanceList.addRecord(attendance1);
-        attendanceList.addRecord(attendance2);
-        attendanceList.addRecord(attendance3);
-        attendanceList.addRecord(attendance4);
-        attendanceList.addRecord(attendance5);
+//        Attendance attendance1 = new Attendance("D1001","qy", "11am",null, "Available");
+//        Attendance attendance2 = new Attendance("D1002","wz", "11am",null, "Break");
+//        Attendance attendance3 = new Attendance("D1003","ws", "11am",null, "Break");
+//        Attendance attendance4 = new Attendance("D1004","lucian", "11am",null, "Delivery");
+//        Attendance attendance5 = new Attendance("D1005","bryan", "11am",null, "Break");
+//        attendanceList.addRecord(attendance1);
+//        attendanceList.addRecord(attendance2);
+//        attendanceList.addRecord(attendance3);
+//        attendanceList.addRecord(attendance4);
+//        attendanceList.addRecord(attendance5);
         
     }
 
